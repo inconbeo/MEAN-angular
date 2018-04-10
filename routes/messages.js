@@ -27,9 +27,10 @@ router.get('/', function (req, res, next) {
 router.use('/', function (req, res, next) {
   jwt.verify(req.query.token, 'secret', function (err, decoded) {
     if (err) {
+      console.log('ERRRRROR', err)
       return res.status(401).json({
-        title: 'Not Authenticated',
-        error: err
+        title: 'you are not signed in',
+        error: {message: 'Login credentials must be provided'}
       });
     }
     next();
